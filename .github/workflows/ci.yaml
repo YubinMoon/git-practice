@@ -16,7 +16,10 @@ jobs:
       - run: uv run ruff format --check .
 
   test:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
       - uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9
@@ -27,6 +30,6 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v7
         with:
-          name: coverage.xml
+          name: coverage-${{ matrix.os }}
           path: coverage.xml
           if-no-files-found: ignore
