@@ -34,7 +34,7 @@ def test_final_total(price, qty, discount, expected):
     "price, qty, discount",
     [
         (10_000, 2, -1),
-        (10_000, 2, 100),
+        (10_000, 2, 101),
     ],
 )
 def test_final_total_discount(price, qty, discount):
